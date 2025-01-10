@@ -1,0 +1,177 @@
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f4f4;
+    background: linear-gradient(to bottom, #e3f2fd, #bbdefb);
+    color: #333;
+    transition: all 0.3s ease-in-out;
+}
+
+
+
+
+
+/* Welcome Section */
+.welcome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 15px auto;
+    min-height: 150px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 80%;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.welcome:hover {
+    transform: scale(1.05);
+}
+
+/* Travel Tips Section */
+#headingg {
+    position: relative;
+    margin: 20px auto 10px;
+    text-align: center;
+    font-size: 24px;
+    color: #1e90ff;
+}
+
+#tips {
+    margin: 0 auto;
+    padding: 20px;
+    width: 80%;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+#tips ul {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    list-style: none;
+}
+
+#tips li {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Popular Destinations Section */
+#popularr {
+    margin: 40px auto;
+    width: 90%;
+}
+
+#populartext {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #1e90ff;
+    margin-bottom: 20px;
+}
+
+#popularimages {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.box {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.box:hover {
+    transform: translateY(-5px);
+}
+
+.image {
+    flex: 1;
+    border-right: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.image img {
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.text {
+    flex: 2;
+    padding: 20px;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Footer Section */
+footer {
+    background: linear-gradient(90deg, #00bfff, #1e90ff);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 1s ease-out;
+    border-top: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Animations */
+@keyframes slideInDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes glowEffect {
+    from {
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(0, 191, 255, 0.6);
+    }
+    to {
+        text-shadow: 0 0 20px rgba(255, 255, 255, 1), 0 0 30px rgba(0, 191, 255, 0.9);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
