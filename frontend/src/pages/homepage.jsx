@@ -1,17 +1,31 @@
-import React, {useEffect, useState} from "react";
-import {Link } from "react-router-dom";
-import "../css/homepage.css"; 
-import Destination from "./destinations.jsx";
-import Planner from "./planner.jsx";
-import Scheduler from "./scheduler.jsx";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import "../css/homepage.css";
 import Header from "../components/header.jsx";
-import cardsData from "../../card data/cardsData.json";
-import youMayLike from "../../card data/youMayLike.json";
-import nearYou from "../../card data/nearYou.json";
 
-
+const API_URL = "http://localhost:3000/api/cards";  
 
 const Homepage = () => {
+  const [cardsData, setCardsData] = useState([]);
+  const [youMayLike, setYouMayLike] = useState([]);
+  const [nearYou, setNearYou] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(API_URL);
+        const data = await response.json();
+        setCardsData(data.cardsData);    
+        setYouMayLike(data.youMayLike);  
+        setNearYou(data.nearYou);        
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div>
       <Header />
@@ -41,15 +55,15 @@ const Homepage = () => {
       </div>
 
       <div id="categories-wrapper">
-         {/* Cards Data Section */}
+        {/* Cards Data Section */}
         <div className="category-section">
           <h2>Popular Destinations</h2>
           <div className="grid-container">
-            {cardsData.slice(0, 10).map((card) => (
-              <div key={card.id} className="grid-item">
+            {cardsData.map((card) => (
+              <div key={card._id} className="grid-item">
                 <img src={card.image} alt={card.title} />
-                  <h3>{card.title}</h3>
-                  <p>{card.description}</p>
+                <h3>{card.title}</h3>
+                <p>{card.description}</p>
               </div>
             ))}
           </div>
@@ -59,8 +73,8 @@ const Homepage = () => {
         <div className="category-section">
           <h2>You May Like</h2>
           <div className="grid-container">
-            {youMayLike.slice(0, 10).map((card) => (
-              <div key={card.id} className="grid-item">
+            {youMayLike.map((card) => (
+              <div key={card._id} className="grid-item">
                 <img src={card.image} alt={card.title} />
                 <h3>{card.title}</h3>
                 <p>{card.description}</p>
@@ -73,8 +87,8 @@ const Homepage = () => {
         <div className="category-section">
           <h2>Near You</h2>
           <div className="grid-container">
-            {nearYou.slice(0, 10).map((card) => (
-              <div key={card.id} className="grid-item">
+            {nearYou.map((card) => (
+              <div key={card._id} className="grid-item">
                 <img src={card.image} alt={card.title} />
                 <h3>{card.title}</h3>
                 <p>{card.description}</p>
@@ -83,9 +97,6 @@ const Homepage = () => {
           </div>
         </div>
       </div>
-
-      
-      
 
       {/* Footer */}
       <footer>

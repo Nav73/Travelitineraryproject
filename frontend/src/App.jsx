@@ -9,7 +9,7 @@ import Weather from "./pages/weather.jsx";
 import Checklist from "./pages/checklist.jsx";
 import Calendar from "./pages/calender.jsx";
 import Itinerary from "./pages/itinerary.jsx";
-// import Signup from "./Signup";
+
 
 const App = () => {
   return (
@@ -24,7 +24,7 @@ const App = () => {
         <Route path="/packing" element={<Checklist />} />
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/itinerary" element={<Itinerary />} />
-        {/* <Route path="/signup" element={<Signup />} />  */}
+        
       </Routes>
     </Router>
   );
