@@ -36,7 +36,7 @@ const Checklist = () => {
             onChange={(e) => setNewItem(e.target.value)}
             required
           />
-          <button type="submit">Add to List</button>x
+          <button type="submit">Add to List</button>
         </form>
 
         <ul className="packing-list">

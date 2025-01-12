@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "../css/planner.css";
 import Header from "../components/header.jsx";
 import Footer from "../components/footer.jsx";
+
 const Planner = () => {
   const [tripData, setTripData] = useState({
     tripName: "",
@@ -11,17 +12,26 @@ const Planner = () => {
     destination: "",
     travelers: "",
   });
-  const [savedTrips, setSavedTrips] = useState(
-    JSON.parse(localStorage.getItem("savedTrips")) || []
-  );
+  const [savedTrips, setSavedTrips] = useState([]);
   const [showSavedTrips, setShowSavedTrips] = useState(false);
+
+  useEffect(() => {
+    
+    const fetchSavedTrips = async () => {
+      const response = await fetch(`http://localhost:3000/api/trips`);
+      const data = await response.json();
+      setSavedTrips(data);
+    };
+
+    fetchSavedTrips();
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setTripData({ ...tripData, [name]: value });
   };
 
-  const saveTrip = () => {
+  const saveTrip = async () => {
     const { tripName, startDate, endDate, destination, travelers } = tripData;
 
     if (!tripName || !startDate || !endDate || !destination || !travelers) {
@@ -30,23 +40,50 @@ const Planner = () => {
     }
 
     const newTrip = { ...tripData };
-    const updatedTrips = [...savedTrips, newTrip];
-    setSavedTrips(updatedTrips);
-    localStorage.setItem("savedTrips", JSON.stringify(updatedTrips));
-    alert("Trip saved successfully!");
-    setTripData({
-      tripName: "",
-      startDate: "",
-      endDate: "",
-      destination: "",
-      travelers: "",
-    });
+
+    try {
+      const response = await fetch("http://localhost:3000/api/trips", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newTrip),
+      });
+
+      if (response.ok) {
+        setSavedTrips((prevTrips) => [...prevTrips, newTrip]);
+        alert("Trip saved successfully!");
+        setTripData({
+          tripName: "",
+          startDate: "",
+          endDate: "",
+          destination: "",
+          travelers: "",
+        });
+      } else {
+        alert("Error saving trip.");
+      }
+    } catch (error) {
+      console.error("Error saving trip:", error);
+      alert("Error saving trip.");
+    }
   };
 
-  const deleteTrip = (index) => {
-    const updatedTrips = savedTrips.filter((_, idx) => idx !== index);
-    setSavedTrips(updatedTrips);
-    localStorage.setItem("savedTrips", JSON.stringify(updatedTrips));
+  const deleteTrip = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:3000/api/trips/${id}`, {
+        method: "DELETE",
+      });
+
+      if (response.ok) {
+        setSavedTrips(savedTrips.filter((trip) => trip._id !== id));
+      } else {
+        alert("Error deleting trip.");
+      }
+    } catch (error) {
+      console.error("Error deleting trip:", error);
+      alert("Error deleting trip.");
+    }
   };
 
   return (
@@ -122,13 +159,13 @@ const Planner = () => {
               <h2>Saved Trips</h2>
               <ul>
                 {savedTrips.length > 0 ? (
-                  savedTrips.map((trip, index) => (
-                    <li key={index}>
+                  savedTrips.map((trip) => (
+                    <li key={trip._id}>
                       <strong>{trip.tripName}</strong> <br />
                       From: {trip.startDate} To: {trip.endDate} <br />
                       Destination: {trip.destination} <br />
                       Travelers: {trip.travelers} <br />
-                      <button onClick={() => deleteTrip(index)}>Delete</button>
+                      <button onClick={() => deleteTrip(trip._id)}>Delete</button>
                     </li>
                   ))
                 ) : (
