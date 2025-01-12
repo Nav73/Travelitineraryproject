@@ -28,70 +28,90 @@ body {
     padding: 10px;
   }
   
-  /* Destination container styling */
-  .destination-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    max-width: 800px;
-    height: 500px; /* Increased height for a larger display */
-    border: 1px solid #ddd;
-    border-radius: 8px;
+  /* Destination card styling */
+  /* You May Like Section */
+  #world {
     padding: 20px;
-    box-sizing: border-box;
-    background-color: #f9f9f9;
-  }
-  
-  .destination-card {
-    width: 100%;
     text-align: center;
   }
-  
-  .destination-card img {
-    width: 100%;
-    height: 300px; /* Increased height for better image display */
-    object-fit: cover;
-    border-radius: 8px;
+
+  #world h4 {
+    display: inline;
+    font-size: 2rem;
+    padding: 10px;
+    margin-bottom: 20px;
+    color: black;
+    background-color: white;
   }
-  
-  .description {
-    margin-top: 15px;
-    text-align: left;
-  }
-  
-  #activities-list {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  #activities-list li {
-    margin: 5px 0;
-  }
-  
-  /* Navigation button styling */
-  .navigation {
-    margin: 20px;
+
+  .card-container {
     display: flex;
-    justify-content: center;
+    margin-top: 2%;
+    flex-wrap: wrap;
     gap: 20px;
+    justify-content: center;
   }
-  
-  #nextButton,
-  #prevButton {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: #333;
-    color: white;
-    border: none;
-    border-radius: 5px;
+
+  .card {
+    flex: 1 1 calc(20% - 20px); /* 5 cards per row */
+    max-width: calc(20% - 20px); /* Ensure cards don't exceed 20% width */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    background-color: white
   }
-  
-  #nextButton:disabled,
-  #prevButton:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+
+  .card:hover {
+    transform: translateY(-5px);
+  }
+
+  .card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+  }
+
+  .card h5 {
+    font-size: 18px;
+    margin: 10px 0;
+    padding: 0 10px;
+    color:  black;
+  }
+
+  .card p {
+    font-size: 14px;
+    color: black;
+    padding: 0 10px 10px;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1200px) {
+    .card {
+      flex: 1 1 calc(25% - 20px); /* 4 cards per row */
+      max-width: calc(25% - 20px);
+    }
+  }
+
+  @media (max-width: 992px) {
+    .card {
+      flex: 1 1 calc(33.33% - 20px); /* 3 cards per row */
+      max-width: calc(33.33% - 20px);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .card {
+      flex: 1 1 calc(50% - 20px); /* 2 cards per row */
+      max-width: calc(50% - 20px);
+    }
+  }
+
+  @media (max-width: 576px) {
+    .card {
+      flex: 1 1 calc(100% - 20px); /* 1 card per row */
+      max-width: calc(100% - 20px);
+    }
   }
   
   /* Footer styling */

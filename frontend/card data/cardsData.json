@@ -1,0 +1,182 @@
+[
+  {
+    "id": 1,
+    "title": "Paris, France",
+    "description": "Known for the Eiffel Tower, Paris is a city of art, culture, and romance.",
+    "image": "https://plus.unsplash.com/premium_photo-1661919210043-fd847a58522d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGFyaXMlMkMlMjBmcmFuY2V8ZW58MHx8MHx8fDA%3D"
+  },
+  {
+    "id": 2,
+    "title": "Tokyo, Japan",
+    "description": "A bustling metropolis known for its skyscrapers, shopping, and rich history.",
+    "image": "https://plus.unsplash.com/premium_photo-1715783495625-1da3a04fd8f6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dG9reW8lMjBqYXBhbnxlbnwwfHwwfHx8MA%3D%3D"
+  },
+  {
+    "id": 3,
+    "title": "New York City, USA",
+    "description": "The city that never sleeps, with iconic landmarks like the Statue of Liberty and Central Park.",
+    "image": "https://plus.unsplash.com/premium_photo-1661954654458-c673671d4a08?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bmV3JTIweW9yayUyMGNpdHl8ZW58MHx8MHx8fDA%3D"
+  },
+  {
+    "id": 4,
+    "title": "Rome, Italy",
+    "description": "A city of ancient history, famous for its ruins, including the Colosseum and the Roman Forum.",
+    "image": "https://plus.unsplash.com/premium_photo-1675975706513-9daba0ec12a8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cm9tZXxlbnwwfHwwfHx8MA%3D%3D"
+  },
+  {
+    "id": 5,
+    "title": "Sydney, Australia",
+    "description": "Famous for its beautiful harbor, Sydney Opera House, and stunning beaches.",
+    "image": "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c3lkbmV5fGVufDB8fDB8fHww"
+  },
+  {
+    "id": 6,
+    "title": "Dubai, UAE",
+    "description": "A modern city known for its luxury shopping, skyscrapers, and the Burj Khalifa.",
+    "image": "https://images.unsplash.com/photo-1518684079-3c830dcef090?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZHViYWl8ZW58MHx8MHx8fDA%3D"
+  },
+  {
+    "id": 7,
+    "title": "London, England",
+    "description": "Home to landmarks like the Tower of London, Big Ben, and Buckingham Palace.",
+    "image": "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bG9uZG9ufGVufDB8fDB8fHww"
+  },
+  {
+    "id": 8,
+    "title": "Machu Picchu, Peru",
+    "description": "An ancient Incan city set high in the Andes, known for its breathtaking views and history.",
+    "image": "https://images.unsplash.com/photo-1703568092973-4192b759ed00?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWFjaHUlMjBwaWNjaHV8ZW58MHx8MHx8fDA%3D"
+  },
+  {
+    "id": 9,
+    "title": "Cape Town, South Africa",
+    "description": "A coastal city surrounded by stunning landscapes, including Table Mountain.",
+    "image": "https://images.unsplash.com/photo-1529528070131-eda9f3e90919?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Y2FwZSUyMHRvd258ZW58MHx8MHx8fDA%3D"
+  },
+  {
+    "id": 10,
+    "title": "Istanbul, Turkey",
+    "description": "A city that bridges Europe and Asia, with stunning mosques and the historic Hagia Sophia.",
+    "image": "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aXN0YW5idWx8ZW58MHx8MHx8fDA%3D"
+  },
+  {
+    "id": 11,
+    "title": "Bangkok, Thailand",
+    "description": "A vibrant city known for its street markets, grand palaces, and temples.",
+    "image": "https://images.unsplash.com/photo-1531169628939-e84f860fa5d6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YmFuZ2tva3xlbnwwfHwwfHx8MA%3D%3D"
+  },
+  {
+    "id": 12,
+    "title": "Dubai Desert, UAE",
+    "description": "Experience the golden sands and thrilling desert safaris in the UAE’s vast deserts.",
+    "image": "https://images.unsplash.com/photo-1528702748617-c64d49f918af?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZHViYWklMjBkZXNydCUyMHVhZXxlbnwwfHwwfHx8MA%3D%3D"
+  },
+  {
+    "id": 13,
+    "title": "Barcelona, Spain",
+    "description": "A city of modernist architecture, stunning beaches, and vibrant nightlife.",
+    "image": "https://images.unsplash.com/photo-1529551739587-e242c564f727?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8YmFyY2Vsb25hfGVufDB8fDB8fHww"
+  },
+  {
+    "id": 14,
+    "title": "Bora Bora, French Polynesia",
+    "description": "An island paradise with crystal clear waters, overwater bungalows, and coral reefs.",
+    "image": "https://images.unsplash.com/photo-1595256875238-9c2111c52554?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGJvcmElMjBib2FyYXxlbnwwfHwwfHx8MA%3D%3D"
+  },
+  {
+    "id": 15,
+    "title": "Athens, Greece",
+    "description": "The cradle of Western civilization, home to ancient ruins like the Acropolis.",
+    "image": "https://images.unsplash.com/photo-1498503403619-e39e4ff390fe?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGFyaGVucyUyMGdyZWVjZXxlbnwwfHwwfHx8MA%3D%3D"
+  },
+  {
+    "id": 16,
+    "title": "Rio de Janeiro, Brazil",
+    "description": "A vibrant city known for its Carnival festival, beaches, and the Christ the Redeemer statue.",
+    "image": "https://images.unsplash.com/photo-1583978618462-298a80351397?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cmlvJTIwZGUlMjBqYW5laXJvfGVufDB8fDB8fHww"
+  },
+  {
+    "id": 17,
+    "title": "Kyoto, Japan",
+    "description": "A city famous for its beautiful temples, traditional tea houses, and cherry blossoms.",
+    "image": "https://images.unsplash.com/photo-1468779065891-103dac4a7c48?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGt5b3RvfGVufDB8fDB8fHww"
+  },
+  {
+    "id": 18,
+    "title": "Dubai Marina, UAE",
+    "description": "An upscale waterfront with luxury yachts, tall towers, and fine dining.",
+    "image": "https://plus.unsplash.com/premium_photo-1661918376346-bb775e744fcb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZHViYWklMjBtYXJpbmF8ZW58MHx8MHx8fDA%3D"
+  },
+  {
+    "id": 19,
+    "title": "Santorini, Greece",
+    "description": "Famous for its whitewashed buildings, blue domes, and stunning sunset views.",
+    "image": "https://images.unsplash.com/photo-1497262693247-aa258f96c4f5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2Fucm9yaW5pbSUyMGdyZWVjZXxlbnwwfHwwfHx8MA%3D%3D"
+  },
+  {
+    "id": 20,
+    "title": "Banff, Canada",
+    "description": "Nestled in the Canadian Rockies, Banff is known for its stunning mountain landscapes and turquoise lakes.",
+    "image": "https://images.unsplash.com/photo-1605554041784-1091d8d1f234?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmFuZmYlMjBjYW5hZGF8ZW58MHx8MHx8fDA%3D"
+  },
+  {
+    "id": 21,
+    "title": "Great Wall of China, China",
+    "description": "One of the most iconic landmarks in the world, the Great Wall stretches over 13,000 miles.",
+    "image": "https://plus.unsplash.com/premium_photo-1664304492320-8359efcaad38?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Z3JlYXQlMjB3YWxsJTIwb2YlMjBjaGluYXxlbnwwfHwwfHx8MA%3D%3D"
+  },
+  {
+    "id": 22,
+    "title": "Zanzibar, Tanzania",
+    "description": "A tropical paradise with stunning beaches, historical Stone Town, and spice plantations.",
+    "image": "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8emFubmliYXIlMjB0YW56YW5pYXxlbnwwfHwwfHx8MA%3D%3D"
+  },
+  {
+    "id": 23,
+    "title": "Venice, Italy",
+    "description": "A unique city built on canals, famous for gondola rides and historic architecture.",
+    "image": "https://plus.unsplash.com/premium_photo-1676120651720-374f3f499c5e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dmVuaWNlJTIwaXRhbHl8ZW58MHx8MHx8fDA%3D"
+  },
+  {
+    "id": 24,
+    "title": "Grand Canyon, USA",
+    "description": "A natural wonder, with breathtaking views of massive rock formations and the Colorado River.",
+    "image": "https://plus.unsplash.com/premium_photo-1669050701110-a5eb879f1b6a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Z3JhbmQlMjBjYW55b258ZW58MHx8MHx8fDA%3D"
+  },
+  {
+    "id": 25,
+    "title": "Amsterdam, Netherlands",
+    "description": "Known for its canals, art museums, and cycling culture.",
+    "image": "https://images.unsplash.com/photo-1512470876302-972faa2aa9a4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YW1zdGVyZGFtJTIwbmV0aGVybGFuZHxlbnwwfHwwfHx8MA%3D%3D"
+  },
+  {
+    "id": 26,
+    "title": "Queenstown, New Zealand",
+    "description": "An adventure lover's paradise surrounded by mountains and lakes, perfect for outdoor activities.",
+    "image": "https://images.unsplash.com/photo-1519871401754-8578d6dff38d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cXVlZW5zdG93biUyMG5ld3plbGFuZHxlbnwwfHwwfHx8MA%3D%3D"
+  },
+  {
+    "id": 27,
+    "title": "Hawaii, USA",
+    "description": "A tropical paradise known for its beaches, volcanoes, and lush landscapes.",
+    "image": "https://images.unsplash.com/photo-1598135753163-6167c1a1ad65?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aGF3YWlpfGVufDB8fDB8fHww"
+  },
+  {
+    "id": 28,
+    "title": "Serengeti, Tanzania",
+    "description": "Famous for its annual migration of wildebeest and the Big Five wildlife.",
+    "image": "https://images.unsplash.com/photo-1707410436272-1bcc71ecafb3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2VyZW5nZXRpfGVufDB8fDB8fHww"
+  },
+  {
+    "id": 29,
+    "title": "Marrakech, Morocco",
+    "description": "A city known for its bustling souks, stunning palaces, and the Atlas Mountains.",
+    "image": "https://images.unsplash.com/photo-1597212618440-806262de4f6b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bWFycmFrZWNoJTIwbWFyb2Njb3xlbnwwfHwwfHx8MA%3D%3D"
+  },
+  {
+    "id": 30,
+    "title": "Petra, Jordan",
+    "description": "An ancient city carved into the rose-red rock, famous for its archaeological sites.",
+    "image": "https://images.unsplash.com/photo-1693776577750-178bd8902367?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8cGV0cmElMjBqb3JkYW58ZW58MHx8MHx8fDA%3D"
+  }
+]
