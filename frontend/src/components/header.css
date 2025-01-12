@@ -8,8 +8,12 @@ header {
     top: 0;
     z-index: 1000;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Ensures header spans the full width */
+    box-sizing: border-box; /* Includes padding in the width calculation */
+    margin: 0; /* Prevents extra margin that could cause space */
 }
 
+/* Logo Style */
 header .logo h1 {
     margin-bottom: 10px;
     font-size: 36px;
@@ -25,6 +29,7 @@ nav ul {
     flex-wrap: wrap; /* Ensure items wrap on smaller screens */
     padding: 0;
     margin: 0;
+    width: 100%; /* Ensures the menu spans the full width */
 }
 
 nav ul li {
@@ -36,7 +41,7 @@ nav ul li a {
     text-decoration: none;
     font-weight: bold;
     font-size: 18px;
-    padding: 10px 10px;
+    padding: 10px 15px;
     border-radius: 50px;
     background: rgba(255, 255, 255, 0.3);
     transition: all 0.3s ease-in-out;

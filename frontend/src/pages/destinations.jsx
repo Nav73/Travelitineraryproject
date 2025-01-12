@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../css/destinations.css";
 import Header from "../components/header";
-
-// URL of your backend API
+import Footer from "../components/footer";
 const API_URL = "http://localhost:3000/api/cards";  // Change this if your server is hosted somewhere else
 
 function Destination() {
@@ -60,9 +59,7 @@ function Destination() {
         </div>
       </div>
 
-      <footer>
-        <p>&copy; 2025 Travel Itinerary. All Rights Reserved.</p>
-      </footer>
+      <Footer />
     </div>
   );
 }

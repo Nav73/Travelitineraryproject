@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../css/homepage.css";
 import Header from "../components/header.jsx";
+import Footer from "../components/footer.jsx";
 
 const API_URL = "http://localhost:3000/api/cards";  
 
@@ -99,9 +100,7 @@ const Homepage = () => {
       </div>
 
       {/* Footer */}
-      <footer>
-        <p>&copy; 2025 Travel Itinerary Project</p>
-      </footer>
+      <Footer />
     </div>
   );
 };

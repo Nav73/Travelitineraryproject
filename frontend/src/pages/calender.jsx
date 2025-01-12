@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../components/header';
 import '../css/calendar.css';
+import Footer from '../components/footer';
 const Calendar = () => {
   const [daysInMonth] = useState(31);
   const [calendar, setCalendar] = useState([]);
@@ -75,6 +76,7 @@ const Calendar = () => {
           <button type="submit">Add to Calendar</button>
         </form>
       </section>
+      <Footer />
     </div>
   );
 };

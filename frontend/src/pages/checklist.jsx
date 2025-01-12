@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../css/checklist.css';
 import Header from '../components/header';
+import Footer from '../components/footer';
 const Checklist = () => {
   const [items, setItems] = useState([]);
   const [newItem, setNewItem] = useState('');
@@ -35,7 +36,7 @@ const Checklist = () => {
             onChange={(e) => setNewItem(e.target.value)}
             required
           />
-          <button type="submit">Add to List</button>
+          <button type="submit">Add to List</button>x
         </form>
 
         <ul className="packing-list">
@@ -47,6 +48,7 @@ const Checklist = () => {
           ))}
         </ul>
       </section>
+      <Footer />
     </div>
   );
 };

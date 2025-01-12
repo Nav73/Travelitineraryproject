@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../css/scheduler.css";
 import Header from "../components/header.jsx";
+import Footer from "../components/footer.jsx";
 const Scheduler = () => {
   const [activities, setActivities] = useState([]);
   const [date, setDate] = useState("");
@@ -67,6 +68,7 @@ const Scheduler = () => {
           </div>
         </section>
       </div>
+      <Footer />
     </div>
   );
 };

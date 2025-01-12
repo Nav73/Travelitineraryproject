@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../css/budget.css";
 import Header from "../components/header";
+import Footer from "../components/footer";
 const Budget = () => {
   const [accommodation, setAccommodation] = useState("");
   const [transportation, setTransportation] = useState("");
@@ -88,6 +89,7 @@ const Budget = () => {
           </div>
         </section>
       </div>
+      <Footer />
     </div>
   );
 };

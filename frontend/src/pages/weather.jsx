@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../css/weather.css";
 import Header from "../components/header";
-
+import Footer from "../components/footer";
 const Weather = () => {
   const [city, setCity] = useState("");
   const [weatherDetails, setWeatherDetails] = useState(
@@ -66,6 +66,7 @@ const Weather = () => {
           </div>
         </section>
       </div>
+      <Footer />
     </div>
   );
 };

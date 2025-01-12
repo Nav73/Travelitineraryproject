@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../css/planner.css";
 import Header from "../components/header.jsx";
+import Footer from "../components/footer.jsx";
 const Planner = () => {
   const [tripData, setTripData] = useState({
     tripName: "",
@@ -143,9 +144,7 @@ const Planner = () => {
       </main>
 
       {/* Footer */}
-      <footer>
-        <p>&copy; 2025 Travel Itinerary Project</p>
-      </footer>
+      <Footer />
     </div>
   );
 };

@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import Header from '../components/header';
 import '../css/itinerary.css';
-
+import Footer from '../components/footer';
 
 const Itinerary = () => {
   const [days, setDays] = useState([]);
   const [dayTitle, setDayTitle] = useState('');
   const [dayDetails, setDayDetails] = useState('');
 
-  // Handle form submission
+
   const handleAddDay = (e) => {
     e.preventDefault();
 
@@ -73,6 +73,7 @@ const Itinerary = () => {
           </ul>
         </div>
       </section>
+      <Footer />
     </div>
   );
 };
