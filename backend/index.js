@@ -3,8 +3,9 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const app = express();
 const { Card, YouMayLike, NearYou } = require("./models/cardmodels");
-const Trip = require("./models/trip"); // New model for trips
+const Trip = require("./models/trip"); 
 const Activity = require("./models/activity");
+const Budget = require('./models/budget')
 require("dotenv").config();
 
 app.use(express.json());
@@ -100,6 +101,41 @@ app.delete("/api/activities/:id", async (req, res) => {
     res.status(200).json({ message: "Activity deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: "Error deleting activity", error });
+  }
+});
+
+app.post("/api/budgets", async (req, res) => {
+  try {
+    const { tripName, accommodation, transportation, food, activities, miscellaneous, totalBudget } = req.body;
+
+    const newBudget = new Budget({
+      tripName,
+      accommodation,
+      transportation,
+      food,
+      activities,
+      miscellaneous,
+      totalBudget,
+    });
+
+    // Save the budget to the database
+    await newBudget.save();
+
+    res.status(201).json({ success: true, message: "Budget saved successfully!", budget: newBudget });
+  } catch (error) {
+    console.error("Error saving budget:", error);
+    res.status(500).json({ success: false, message: "Error saving budget." });
+  }
+});
+
+
+app.get("/api/budgets", async (req, res) => {
+  try {
+    const budgets = await Budget.find(); 
+    res.status(200).json(budgets);
+  } catch (error) {
+    console.error("Error fetching budgets:", error);
+    res.status(500).json({ success: false, message: "Error fetching budgets." });
   }
 });
 const port = process.env.PORT ;
