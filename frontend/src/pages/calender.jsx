@@ -15,7 +15,6 @@ const Calendar = () => {
     setCalendar(days);
   }, [daysInMonth]);
 
-  // Handle activity addition
   const handleAddActivity = (e) => {
     e.preventDefault();
 
