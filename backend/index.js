@@ -6,6 +6,7 @@ const { Card, YouMayLike, NearYou } = require("./models/cardmodels");
 const Trip = require("./models/trip"); 
 const Activity = require("./models/activity");
 const Budget = require('./models/budget')
+const Checklist = require('./models/checklist')
 require("dotenv").config();
 
 app.use(express.json());
@@ -138,6 +139,53 @@ app.get("/api/budgets", async (req, res) => {
     res.status(500).json({ success: false, message: "Error fetching budgets." });
   }
 });
+
+
+app.post("/api/checklist", async (req, res) => {
+  try {
+    const { item } = req.body;
+
+
+    const newItem = new Checklist({
+      item,
+    });
+    await newItem.save();
+
+    res.status(201).json({ success: true, message: "Item added successfully", item: newItem });
+  } catch (error) {
+    console.error("Error adding item:", error);
+    res.status(500).json({ success: false, message: "Error adding item" });
+  }
+});
+
+
+app.get("/api/checklist", async (req, res) => {
+  try {
+    const items = await Checklist.find();
+    res.status(200).json(items);
+  } catch (error) {
+    console.error("Error fetching items:", error);
+    res.status(500).json({ success: false, message: "Error fetching items" });
+  }
+});
+
+app.delete("/api/checklist/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const deletedItem = await Checklist.findByIdAndDelete(id);
+
+    if (deletedItem) {
+      res.status(200).json({ success: true, message: "Item removed successfully" });
+    } else {
+      res.status(404).json({ success: false, message: "Item not found" });
+    }
+  } catch (error) {
+    console.error("Error deleting item:", error);
+    res.status(500).json({ success: false, message: "Error deleting item" });
+  }
+});
+
 const port = process.env.PORT ;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
