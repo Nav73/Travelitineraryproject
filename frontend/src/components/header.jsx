@@ -37,7 +37,7 @@ const Header = () => {
                             <Link to="/itinerary">Itinerary</Link>
                         </li>
                         <li>
-                            <Link to="/signup">Sign Up</Link>
+                            <Link to="/logout">Log out</Link>
                         </li>
                     </ul>
                 </nav>

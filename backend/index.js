@@ -8,6 +8,8 @@ const Activity = require("./models/activity");
 const Budget = require('./models/budget')
 const Checklist = require('./models/checklist')
 const Itinerary = require('./models/itinerary')
+const authRoutes = require('./authRoutes')
+
 require("dotenv").config();
 
 app.use(express.json());
@@ -18,6 +20,8 @@ mongoose
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.log(err));
 
+
+app.use('/api/auth', authRoutes);
 app.get("/api/cards", async (req, res) => {
   try {
     const popularDestinations = await Card.find({}).limit(10);
