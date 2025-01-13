@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "../css/planner.css";
 import Header from "../components/header.jsx";
 import Footer from "../components/footer.jsx";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const Planner = () => {
   const [tripData, setTripData] = useState({
@@ -18,7 +19,7 @@ const Planner = () => {
   useEffect(() => {
     
     const fetchSavedTrips = async () => {
-      const response = await fetch(`http://localhost:3000/api/trips`);
+      const response = await fetch(`${API_BASE_URL}/api/trips`);
       const data = await response.json();
       setSavedTrips(data);
     };
@@ -33,25 +34,26 @@ const Planner = () => {
 
   const saveTrip = async () => {
     const { tripName, startDate, endDate, destination, travelers } = tripData;
-
+  
     if (!tripName || !startDate || !endDate || !destination || !travelers) {
       alert("Please fill in all fields.");
       return;
     }
-
+  
     const newTrip = { ...tripData };
-
+  
     try {
-      const response = await fetch("http://localhost:3000/api/trips", {
+      const response = await fetch(`${API_BASE_URL}/api/trips`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(newTrip),
       });
-
+  
       if (response.ok) {
-        setSavedTrips((prevTrips) => [...prevTrips, newTrip]);
+        const savedTrip = await response.json(); 
+        setSavedTrips((prevTrips) => [...prevTrips, savedTrip]); 
         alert("Trip saved successfully!");
         setTripData({
           tripName: "",
@@ -68,10 +70,11 @@ const Planner = () => {
       alert("Error saving trip.");
     }
   };
+  
 
   const deleteTrip = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/trips/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/api/trips/${id}`, {
         method: "DELETE",
       });
 

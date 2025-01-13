@@ -4,6 +4,7 @@ const cors = require("cors");
 const app = express();
 const { Card, YouMayLike, NearYou } = require("./models/cardmodels");
 const Trip = require("./models/trip"); // New model for trips
+const Activity = require("./models/activity");
 require("dotenv").config();
 
 app.use(express.json());
@@ -62,6 +63,45 @@ app.delete("/api/trips/:id", async (req, res) => {
   }
 });
 
+app.get("/api/activities", async (req, res) => {
+  try {
+    const activities = await Activity.find();
+    res.status(200).json(activities);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching activities", error });
+  }
+});
+
+app.post("/api/activities", async (req, res) => {
+  const { date, activity } = req.body;
+
+  if (!date || !activity) {
+    return res.status(400).json({ message: "Date and activity are required" });
+  }
+
+  try {
+    const newActivity = new Activity({ date, activity });
+    await newActivity.save();
+    res.status(201).json(newActivity);
+  } catch (error) {
+    res.status(500).json({ message: "Error creating activity", error });
+  }
+});
+
+app.delete("/api/activities/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedActivity = await Activity.findByIdAndDelete(id);
+
+    if (!deletedActivity) {
+      return res.status(404).json({ message: "Activity not found" });
+    }
+
+    res.status(200).json({ message: "Activity deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Error deleting activity", error });
+  }
+});
 const port = process.env.PORT ;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
