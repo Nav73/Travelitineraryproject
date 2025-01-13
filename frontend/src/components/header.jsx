@@ -1,17 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './header.css';
 
 const Header = () => {
+    const [menuOpen, setMenuOpen] = useState(false);
+
+    const toggleMenu = () => {
+        setMenuOpen(!menuOpen);
+    };
+
     return (
         <div>
             {/* Header Section */}
             <header>
                 <div className="logo">
-                    <h1>AdventureAtlas - Travel Planners </h1>
+                    <h1>AdventureAtlas - Travel Planners</h1>
+                </div>
+                <div className="hamburger" onClick={toggleMenu}>
+                    &#9776; {/* Hamburger icon */}
                 </div>
                 <nav>
-                    <ul>
+                    <ul className={menuOpen ? 'show' : ''}>
                         <li>
                             <Link to="/destination">Destinations</Link>
                         </li>

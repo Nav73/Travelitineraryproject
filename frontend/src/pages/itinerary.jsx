@@ -11,7 +11,12 @@ const Itinerary = () => {
   useEffect(() => {
     const fetchItinerary = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/api/itinerary`);
+        const token = localStorage.getItem('token');
+        const response = await fetch(`${API_BASE_URL}/api/itinerary`, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        });
         const data = await response.json();
         setDays(data);
       } catch (error) {
@@ -32,10 +37,12 @@ const Itinerary = () => {
     }
 
     try {
+      const token = localStorage.getItem('token');
       const response = await fetch(`${API_BASE_URL}/api/itinerary`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({ title: dayTitle, details: dayDetails }),
       });
@@ -56,10 +63,13 @@ const Itinerary = () => {
   // Handle deleting an itinerary day
   const handleDeleteDay = async (id) => {
     try {
+      const token = localStorage.getItem('token');
       const response = await fetch(`${API_BASE_URL}/api/itinerary/${id}`, {
         method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
       });
-
       const result = await response.json();
       if (result.success) {
         setDays((prevDays) => prevDays.filter((day) => day._id !== id));

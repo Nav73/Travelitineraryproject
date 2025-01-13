@@ -53,20 +53,34 @@ nav ul li a:hover {
     color: #1e90ff;
     transform: scale(1.1);
 }
+.hamburger {
+    display: none; 
+}
 
-/* Responsive Design */
 @media (max-width: 768px) {
     nav ul {
-        flex-direction: column; /* Stack items vertically */
+        flex-direction: column;
         align-items: center;
+        display: none;
+    }
+
+    nav ul.show {
+        display: flex;
     }
 
     nav ul li {
-        width: 100%; /* Take full width */
+        width: 100%;
         text-align: center;
     }
 
     nav ul li a {
-        width: 90%; /* Keep links responsive */
+        width: 90%; 
+    }
+
+    .hamburger {
+        display: block;
+    }
+    .hamburger:hover{
+        cursor : pointer;
     }
 }

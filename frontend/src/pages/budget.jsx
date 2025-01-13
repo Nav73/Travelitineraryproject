@@ -47,10 +47,12 @@ const Budget = () => {
     };
 
     try {
+      const token = localStorage.getItem('token');
       const response = await fetch(`${API_BASE_URL}/api/budgets`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify(budgetData),
       });
@@ -76,7 +78,12 @@ const Budget = () => {
   // Fetch saved budgets
   const fetchSavedBudgets = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/budgets`);
+      const token = localStorage.getItem('token');
+      const response = await fetch(`${API_BASE_URL}/api/budgets`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
       const data = await response.json();
       setSavedBudgets(data);
     } catch (error) {

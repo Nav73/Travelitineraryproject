@@ -12,7 +12,12 @@ const Checklist = () => {
   
   useEffect(() => {
     const fetchItems = async () => {
-      const response = await fetch(`${API_BASE_URL}/api/checklist`);
+      const token = localStorage.getItem('token');
+      const response = await fetch(`${API_BASE_URL}/api/checklist`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
       const data = await response.json();
       setItems(data);
     };
@@ -25,20 +30,21 @@ const Checklist = () => {
 
     if (newItem.trim() !== "") {
       const item = newItem.trim();
-
+      const token = localStorage.getItem('token');
       // Send the new item to the backend
       const response = await fetch(`${API_BASE_URL}/api/checklist`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({ item }),
       });
 
       if (response.ok) {
         const addedItem = await response.json();
-        setItems((prevItems) => [...prevItems, addedItem.item]); // Add the new item to the list
-        setNewItem(""); // Clear the input field
+        setItems((prevItems) => [...prevItems, addedItem.item]); 
+        setNewItem(""); 
       } else {
         alert("Error adding item.");
       }
@@ -47,8 +53,12 @@ const Checklist = () => {
 
   const handleRemoveItem = async (id) => {
     try {
+      const token = localStorage.getItem('token');
       const response = await fetch(`${API_BASE_URL}/api/checklist/${id}`, {
         method: "DELETE",
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
       });
 
       if (response.ok) {
@@ -78,7 +88,7 @@ const Checklist = () => {
           onChange={(e) => setNewItem(e.target.value)}
           required
         />
-        <button type="submit">Add to List</button>``
+        <button type="submit">Add to List</button>
       </form>
 
     <ul className="packing-list">

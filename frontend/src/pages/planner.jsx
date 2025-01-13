@@ -19,9 +19,18 @@ const Planner = () => {
   useEffect(() => {
     
     const fetchSavedTrips = async () => {
-      const response = await fetch(`${API_BASE_URL}/api/trips`);
-      const data = await response.json();
-      setSavedTrips(data);
+      try {
+        const token = localStorage.getItem('token');
+        const response = await fetch(`${API_BASE_URL}/api/trips`, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+        const data = await response.json();
+        setSavedTrips(data);
+      } catch (error) {
+        console.error('Error fetching trips:', error);
+      }
     };
 
     fetchSavedTrips();
@@ -43,13 +52,16 @@ const Planner = () => {
     const newTrip = { ...tripData };
   
     try {
+      const token = localStorage.getItem('token');
       const response = await fetch(`${API_BASE_URL}/api/trips`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify(newTrip),
       });
+
   
       if (response.ok) {
         const savedTrip = await response.json(); 
@@ -63,6 +75,7 @@ const Planner = () => {
           travelers: "",
         });
       } else {
+        console.error("Error saving trip:", await response.text());
         alert("Error saving trip.");
       }
     } catch (error) {
@@ -74,9 +87,14 @@ const Planner = () => {
 
   const deleteTrip = async (id) => {
     try {
+      const token = localStorage.getItem('token');
       const response = await fetch(`${API_BASE_URL}/api/trips/${id}`, {
         method: "DELETE",
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
       });
+
 
       if (response.ok) {
         setSavedTrips(savedTrips.filter((trip) => trip._id !== id));

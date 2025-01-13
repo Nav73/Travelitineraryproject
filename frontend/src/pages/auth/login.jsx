@@ -41,7 +41,15 @@ const Login = () => {
   };
 
   return (
+    <div className='auth-page'>
     <div className="auth-container">
+      {/* Banner Section */}
+      <div className="banner">
+        <h1>AdventureAtlas</h1>
+        <p>Your journey begins here! Login or Signup to explore.</p>
+      </div>
+
+      {/* Login Form */}
       <h2>Login</h2>
       {error && <div className="error-message">{error}</div>}
       <form onSubmit={handleLogin}>
@@ -49,6 +57,7 @@ const Login = () => {
           <label>Email:</label>
           <input
             type="email"
+            placeholder="Enter your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -59,6 +68,7 @@ const Login = () => {
           <label>Password:</label>
           <input
             type="password"
+            placeholder="Enter your password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
@@ -72,7 +82,7 @@ const Login = () => {
         Don't have an account? <a href="/signup">Sign up</a>
       </p>
     </div>
+    </div>
   );
 };
-
 export default Login;

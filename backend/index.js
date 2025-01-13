@@ -8,8 +8,8 @@ const Activity = require("./models/activity");
 const Budget = require('./models/budget')
 const Checklist = require('./models/checklist')
 const Itinerary = require('./models/itinerary')
-const authRoutes = require('./authRoutes')
-
+const authRoutes = require('./middleware/authRoutes')
+const auth = require('./middleware/auth');
 require("dotenv").config();
 
 app.use(express.json());
@@ -38,18 +38,28 @@ app.get("/api/cards", async (req, res) => {
   }
 });
 
-app.get("/api/trips", async (req, res) => {
+app.get("/api/trips",auth, async (req, res) => {
   try {
-    const trips = await Trip.find();
-    res.json(trips);
+    const trips = await Trip.find({ userId: req.user.id });
+    res.status(200).json(trips);
   } catch (error) {
     res.status(500).json({ message: "Error fetching trips", error });
   }
 });
 
-app.post("/api/trips", async (req, res) => {
+app.post("/api/trips",auth, async (req, res) => {
   try {
-    const newTrip = new Trip(req.body);
+    const { tripName, startDate, endDate, destination, travelers } = req.body;
+
+    const newTrip = new Trip({
+      userId: req.user.id,
+      tripName,
+      startDate,
+      endDate,
+      destination,
+      travelers,
+    });
+
     await newTrip.save();
     res.status(201).json(newTrip);
   } catch (error) {
@@ -58,9 +68,9 @@ app.post("/api/trips", async (req, res) => {
 });
 
 // API to delete a trip
-app.delete("/api/trips/:id", async (req, res) => {
+app.delete("/api/trips/:id", auth, async (req, res) => {
   try {
-    const trip = await Trip.findByIdAndDelete(req.params.id);
+    const trip = await Trip.findByIdAndDelete({ _id: req.params.id, userId: req.user.id });
     if (!trip) {
       return res.status(404).json({ message: "Trip not found" });
     }
@@ -70,16 +80,16 @@ app.delete("/api/trips/:id", async (req, res) => {
   }
 });
 
-app.get("/api/activities", async (req, res) => {
+app.get("/api/activities", auth, async (req, res) => {
   try {
-    const activities = await Activity.find();
+    const activities = await Activity.find({ userId: req.user.id });
     res.status(200).json(activities);
   } catch (error) {
     res.status(500).json({ message: "Error fetching activities", error });
   }
 });
 
-app.post("/api/activities", async (req, res) => {
+app.post("/api/activities",auth, async (req, res) => {
   const { date, activity } = req.body;
 
   if (!date || !activity) {
@@ -87,7 +97,7 @@ app.post("/api/activities", async (req, res) => {
   }
 
   try {
-    const newActivity = new Activity({ date, activity });
+    const newActivity = new Activity({ userId: req.user.id, date, activity });
     await newActivity.save();
     res.status(201).json(newActivity);
   } catch (error) {
@@ -95,10 +105,10 @@ app.post("/api/activities", async (req, res) => {
   }
 });
 
-app.delete("/api/activities/:id", async (req, res) => {
+app.delete("/api/activities/:id", auth,async (req, res) => {
   try {
-    const { id } = req.params;
-    const deletedActivity = await Activity.findByIdAndDelete(id);
+
+    const deletedActivity = await Activity.findByIdAndDelete({ _id: req.params.id, userId: req.user.id });
 
     if (!deletedActivity) {
       return res.status(404).json({ message: "Activity not found" });
@@ -110,11 +120,12 @@ app.delete("/api/activities/:id", async (req, res) => {
   }
 });
 
-app.post("/api/budgets", async (req, res) => {
+app.post("/api/budgets", auth, async (req, res) => {
   try {
     const { tripName, accommodation, transportation, food, activities, miscellaneous, totalBudget } = req.body;
 
     const newBudget = new Budget({
+      userId: req.user.id,
       tripName,
       accommodation,
       transportation,
@@ -135,9 +146,9 @@ app.post("/api/budgets", async (req, res) => {
 });
 
 
-app.get("/api/budgets", async (req, res) => {
+app.get("/api/budgets",auth, async (req, res) => {
   try {
-    const budgets = await Budget.find(); 
+    const budgets = await Budget.find({ userId: req.user.id }); 
     res.status(200).json(budgets);
   } catch (error) {
     console.error("Error fetching budgets:", error);
@@ -146,12 +157,11 @@ app.get("/api/budgets", async (req, res) => {
 });
 
 
-app.post("/api/checklist", async (req, res) => {
+app.post("/api/checklist", auth ,async (req, res) => {
   try {
     const { item } = req.body;
-
-
     const newItem = new Checklist({
+      userId: req.user.id,
       item,
     });
     await newItem.save();
@@ -164,9 +174,9 @@ app.post("/api/checklist", async (req, res) => {
 });
 
 
-app.get("/api/checklist", async (req, res) => {
+app.get("/api/checklist", auth,async (req, res) => {
   try {
-    const items = await Checklist.find();
+    const items = await Checklist.find({ userId: req.user.id });
     res.status(200).json(items);
   } catch (error) {
     console.error("Error fetching items:", error);
@@ -174,11 +184,10 @@ app.get("/api/checklist", async (req, res) => {
   }
 });
 
-app.delete("/api/checklist/:id", async (req, res) => {
+app.delete("/api/checklist/:id",auth, async (req, res) => {
   try {
-    const { id } = req.params;
 
-    const deletedItem = await Checklist.findByIdAndDelete(id);
+    const deletedItem = await Checklist.findByIdAndDelete({ _id: req.params.id, userId: req.user.id });
 
     if (deletedItem) {
       res.status(200).json({ success: true, message: "Item removed successfully" });
@@ -193,14 +202,14 @@ app.delete("/api/checklist/:id", async (req, res) => {
 
 
 // Add a new itinerary day
-app.post('/api/itinerary', async (req, res) => {
+app.post('/api/itinerary',auth, async (req, res) => {
   try {
     const { title, details } = req.body;
     if (!title || !details) {
       return res.status(400).json({ message: 'Title and Details are required.' });
     }
 
-    const newItineraryDay = new Itinerary({ title, details });
+    const newItineraryDay = new Itinerary({userId: req.user.id, title, details });
     await newItineraryDay.save();
 
     res.status(201).json({ success: true, itinerary: newItineraryDay });
@@ -211,9 +220,9 @@ app.post('/api/itinerary', async (req, res) => {
 });
 
 // Get all itinerary days
-app.get('/api/itinerary', async (req, res) => {
+app.get('/api/itinerary', auth, async (req, res) => {
   try {
-    const itinerary = await Itinerary.find();
+    const itinerary = await Itinerary.find({ userId: req.user.id });
     res.status(200).json(itinerary);
   } catch (error) {
     console.error('Error fetching itinerary:', error);
@@ -222,22 +231,20 @@ app.get('/api/itinerary', async (req, res) => {
 });
 
 // Delete an itinerary day
-app.delete('/api/itinerary/:id', async (req, res) => {
+app.delete("/api/itinerary/:id", auth, async (req, res) => {
   try {
-    const { id } = req.params;
-    const deletedItinerary = await Itinerary.findByIdAndDelete(id);
+    const item = await Itinerary.findOneAndDelete({ _id: req.params.id, userId: req.user.id });
 
-    if (deletedItinerary) {
-      res.status(200).json({ success: true, deletedId: id });
-    } else {
-      res.status(404).json({ success: false, message: 'Itinerary day not found' });
+    if (!item) {
+      return res.status(404).json({ success: false, message: "Item not found or not authorized." });
     }
+
+    res.status(200).json({ success: true, message: "Item removed successfully!" });
   } catch (error) {
-    console.error('Error deleting itinerary day:', error);
-    res.status(500).json({ success: false, message: 'Server error' });
+    console.error("Error removing item:", error);
+    res.status(500).json({ success: false, message: "Error removing item." });
   }
 });
-
 
 const port = process.env.PORT ;
 app.listen(port, () => {

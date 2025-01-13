@@ -3,14 +3,17 @@ import { Link } from "react-router-dom";
 import "../css/homepage.css";
 import Header from "../components/header.jsx";
 import Footer from "../components/footer.jsx";
+import Features from "./features.jsx";
 
-const API_URL = "http://localhost:3000/api/cards";  
-
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const API_URL = `${API_BASE_URL}/api/cards`;  
+const USER_API_URL = `${API_BASE_URL}/api/auth/user`; 
 const Homepage = () => {
   const [cardsData, setCardsData] = useState([]);
   const [youMayLike, setYouMayLike] = useState([]);
   const [nearYou, setNearYou] = useState([]);
-
+  const [username, setUsername] = useState('');
+  const [error, setError] = useState('');
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -26,34 +29,47 @@ const Homepage = () => {
 
     fetchData();
   }, []);
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const token = localStorage.getItem("token"); // Get the token from localStorage
+        if (!token) {
+          setError("No token found. Please log in.");
+          return;
+        }
 
+        const response = await fetch(USER_API_URL, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          setUsername(data.username); // Set the username
+        } else {
+          setError(data.message || "Failed to fetch user data.");
+        }
+      } catch (err) {
+        console.error("Error fetching user data:", err);
+        setError("An error occurred while fetching user data.");
+      }
+    };
+
+    fetchUserData();
+  }, []);
   return (
-    <div>
+    <div className="homepage">
       <Header />
       {/* Welcome Section */}
       <div className="welcome">
-        <h2>Welcome to Your Travel Itinerary!</h2>
+       <h2>Welcome, {username}!</h2>
         <p>Plan your next adventure and organize all your travel details in one place.</p>
       </div>
 
       {/* Travel Tips Section */}
-      <div id="heading1">
-        <div id="headingg">
-          <h4 id="traveltips">Travel Tips:</h4>
-        </div>
-      </div>
-      <div id="tips1">
-        <div id="tips">
-          <ul>
-            <li><b>Research your destination:</b> Understand the local culture, language, and customs. Familiarize yourself with key attractions, transportation options, and safety considerations.</li>
-            <li><b>Plan, but Stay Flexible:</b> Have a basic itinerary, but leave room for spontaneous adventures and local recommendations.</li>
-            <li><b>Pack Light:</b> Stick to essentials and versatile clothing to make your journey smoother and avoid heavy luggage.</li>
-            <li><b>Embrace Local Culture:</b> Learn a few local phrases and customs to enhance your travel experience and show respect.</li>
-            <li><b>Reduce Environmental Impact:</b> Opt for eco-friendly accommodations and transportation to lessen your travel footprint.</li>
-            <li><b>Manage Money Wisely:</b> Use a mix of payment methods and keep track of your spending to stay within budget.</li>
-          </ul>
-        </div>
-      </div>
+      <Features />
 
       <div id="categories-wrapper">
         {/* Cards Data Section */}

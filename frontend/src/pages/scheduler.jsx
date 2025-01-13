@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "../css/scheduler.css";
 import Header from "../components/header.jsx";
 import Footer from "../components/footer.jsx";
-
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const Scheduler = () => {
   const [activities, setActivities] = useState([]);
   const [date, setDate] = useState("");
@@ -13,7 +13,12 @@ const Scheduler = () => {
   useEffect(() => {
     const fetchActivities = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/activities`);
+        const token = localStorage.getItem('token');
+        const response = await fetch(`${API_BASE_URL}/api/activities`, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        });
         const data = await response.json();
         setActivities(data);
       } catch (error) {
@@ -34,10 +39,12 @@ const Scheduler = () => {
     }
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/activities`, {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`${API_BASE_URL}/api/activities`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({ date, activity }),
       });
@@ -58,10 +65,13 @@ const Scheduler = () => {
   // Remove activity
   const removeActivity = async (id) => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/activities/${id}`, {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`${API_BASE_URL}/api/activities/${id}`, {
         method: "DELETE",
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
       });
-
       if (response.ok) {
         setActivities(activities.filter((item) => item._id !== id));
       } else {
