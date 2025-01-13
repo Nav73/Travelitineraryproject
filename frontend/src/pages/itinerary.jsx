@@ -1,30 +1,74 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../components/header';
 import '../css/itinerary.css';
 import Footer from '../components/footer';
-
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const Itinerary = () => {
   const [days, setDays] = useState([]);
   const [dayTitle, setDayTitle] = useState('');
   const [dayDetails, setDayDetails] = useState('');
 
+  useEffect(() => {
+    const fetchItinerary = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/itinerary`);
+        const data = await response.json();
+        setDays(data);
+      } catch (error) {
+        console.error('Error fetching itinerary:', error);
+      }
+    };
 
-  const handleAddDay = (e) => {
+    fetchItinerary();
+  }, []);
+
+  // Handle adding a new itinerary day
+  const handleAddDay = async (e) => {
     e.preventDefault();
 
-    if (dayTitle.trim() && dayDetails.trim()) {
-      setDays((prevDays) => [
-        ...prevDays,
-        { title: dayTitle, details: dayDetails },
-      ]);
-      setDayTitle('');
-      setDayDetails('');
+    if (!dayTitle.trim() || !dayDetails.trim()) {
+      alert('Please fill in both title and details.');
+      return;
+    }
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/itinerary`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ title: dayTitle, details: dayDetails }),
+      });
+
+      const newDay = await response.json();
+      if (newDay.success) {
+        setDays((prevDays) => [...prevDays, newDay.itinerary]);
+        setDayTitle('');
+        setDayDetails('');
+      } else {
+        alert('Error adding day to itinerary');
+      }
+    } catch (error) {
+      console.error('Error saving day to itinerary:', error);
     }
   };
 
   // Handle deleting an itinerary day
-  const handleDeleteDay = (index) => {
-    setDays((prevDays) => prevDays.filter((_, i) => i !== index));
+  const handleDeleteDay = async (id) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/itinerary/${id}`, {
+        method: 'DELETE',
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        setDays((prevDays) => prevDays.filter((day) => day._id !== id));
+      } else {
+        alert('Error deleting day');
+      }
+    } catch (error) {
+      console.error('Error deleting day from itinerary:', error);
+    }
   };
 
   return (
@@ -54,17 +98,16 @@ const Itinerary = () => {
           </form>
         </div>
 
-    
         <div id="itinerary-list">
           <h3>Planned Days</h3>
           <ul>
-            {days.map((day, index) => (
-              <li key={index}>
+            {days.map((day) => (
+              <li key={day._id}>
                 <h4>{day.title}</h4>
                 <p>{day.details}</p>
                 <button
                   className="delete-btn"
-                  onClick={() => handleDeleteDay(index)}
+                  onClick={() => handleDeleteDay(day._id)}
                 >
                   Remove
                 </button>
@@ -73,6 +116,7 @@ const Itinerary = () => {
           </ul>
         </div>
       </section>
+
       <Footer />
     </div>
   );

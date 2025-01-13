@@ -7,6 +7,7 @@ const Trip = require("./models/trip");
 const Activity = require("./models/activity");
 const Budget = require('./models/budget')
 const Checklist = require('./models/checklist')
+const Itinerary = require('./models/itinerary')
 require("dotenv").config();
 
 app.use(express.json());
@@ -185,6 +186,54 @@ app.delete("/api/checklist/:id", async (req, res) => {
     res.status(500).json({ success: false, message: "Error deleting item" });
   }
 });
+
+
+// Add a new itinerary day
+app.post('/api/itinerary', async (req, res) => {
+  try {
+    const { title, details } = req.body;
+    if (!title || !details) {
+      return res.status(400).json({ message: 'Title and Details are required.' });
+    }
+
+    const newItineraryDay = new Itinerary({ title, details });
+    await newItineraryDay.save();
+
+    res.status(201).json({ success: true, itinerary: newItineraryDay });
+  } catch (error) {
+    console.error('Error saving itinerary day:', error);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
+// Get all itinerary days
+app.get('/api/itinerary', async (req, res) => {
+  try {
+    const itinerary = await Itinerary.find();
+    res.status(200).json(itinerary);
+  } catch (error) {
+    console.error('Error fetching itinerary:', error);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
+// Delete an itinerary day
+app.delete('/api/itinerary/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedItinerary = await Itinerary.findByIdAndDelete(id);
+
+    if (deletedItinerary) {
+      res.status(200).json({ success: true, deletedId: id });
+    } else {
+      res.status(404).json({ success: false, message: 'Itinerary day not found' });
+    }
+  } catch (error) {
+    console.error('Error deleting itinerary day:', error);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
 
 const port = process.env.PORT ;
 app.listen(port, () => {
