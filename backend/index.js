@@ -4,12 +4,12 @@ const cors = require("cors");
 require("dotenv").config();
 
 const authRoutes = require("./middleware/authRoutes");
-const cardsRoutes = require("./routes/cards");
-const tripsRoutes = require("./routes/trips");
-const activitiesRoutes = require("./routes/activities");
-const budgetsRoutes = require("./routes/budgets");
-const checklistRoutes = require("./routes/checklist");
-const itineraryRoutes = require("./routes/itinerary");
+const cardsRoutes = require("./api/cards");
+const tripsRoutes = require("./api/trips");
+const activitiesRoutes = require("./api/activities");
+const budgetsRoutes = require("./api/budgets");
+const checklistRoutes = require("./api/checklist");
+const itineraryRoutes = require("./api/itinerary");
 
 const app = express();
 const EventEmitter = require('events');
