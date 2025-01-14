@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import "../css/planner.css";
 import Header from "../components/header.jsx";
 import Footer from "../components/footer.jsx";
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+// const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const API_BASE_URL = "http://localhost:3000";
 
 const Planner = () => {
   const [tripData, setTripData] = useState({

@@ -3,7 +3,8 @@ import "../css/checklist.css";
 import Header from "../components/header";
 import Footer from "../components/footer";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+// const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const API_BASE_URL = "http://localhost:3000";
 
 const Checklist = () => {
   const [items, setItems] = useState([]);

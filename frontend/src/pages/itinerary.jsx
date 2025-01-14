@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Header from '../components/header';
 import '../css/itinerary.css';
 import Footer from '../components/footer';
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+// const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const API_BASE_URL = "http://localhost:3000";
 const Itinerary = () => {
   const [days, setDays] = useState([]);
   const [dayTitle, setDayTitle] = useState('');

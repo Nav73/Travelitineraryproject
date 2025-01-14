@@ -5,7 +5,8 @@ import Header from "../components/header.jsx";
 import Footer from "../components/footer.jsx";
 import Features from "./features.jsx";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+// const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const API_BASE_URL = "http://localhost:3000"; 
 const API_URL = `${API_BASE_URL}/api/cards`;  
 const USER_API_URL = `${API_BASE_URL}/api/auth/user`; 
 const Homepage = () => {
