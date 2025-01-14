@@ -48,7 +48,9 @@ const Itinerary = () => {
       });
 
       const newDay = await response.json();
-      if (newDay.success) {
+
+      if (newDay) {
+        
         setDays((prevDays) => [...prevDays, newDay.itinerary]);
         setDayTitle('');
         setDayDetails('');
@@ -56,7 +58,7 @@ const Itinerary = () => {
         alert('Error adding day to itinerary');
       }
     } catch (error) {
-      console.error('Error saving day to itinerary:', error);
+      console.error('Error saving day to itinerary :', error);
     }
   };
 
@@ -71,7 +73,7 @@ const Itinerary = () => {
         },
       });
       const result = await response.json();
-      if (result.success) {
+      if (result) {
         setDays((prevDays) => prevDays.filter((day) => day._id !== id));
       } else {
         alert('Error deleting day');
